@@ -30,4 +30,22 @@ public class PaymentService {
     public Optional<Payment> getPaymentById(Long id) {
         return paymentRepository.findById(id);
     }
+    public Payment updatePaymentStatus(Long id, String status) {
+
+    Payment payment = paymentRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Payment not found"));
+
+    payment.setStatus(status);
+
+    return paymentRepository.save(payment);
+}
+
+public void deletePayment(Long id) {
+
+    if (!paymentRepository.existsById(id)) {
+        throw new RuntimeException("Payment not found");
+    }
+
+    paymentRepository.deleteById(id);
+}
 }

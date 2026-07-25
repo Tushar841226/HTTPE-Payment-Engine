@@ -26,12 +26,27 @@ public class PaymentController {
     System.out.println("Sender: " + payment.getSenderName());
     System.out.println("Receiver: " + payment.getReceiverName());
     System.out.println("Amount: " + payment.getAmount());
-
-    return paymentService.createPayment(payment);
+        return paymentService.createPayment(payment);
+    }
+    @GetMapping
+    public List<Payment> getAllPayments() {
+        return paymentService.getAllPayments();
 }
 
     @GetMapping("/{id}")
     public Optional<Payment> getPaymentById(@PathVariable Long id) {
         return paymentService.getPaymentById(id);
     }
+    @PutMapping("/{id}")
+    public Payment updatePaymentStatus(
+        @PathVariable Long id,
+        @RequestParam String status) {
+        return paymentService.updatePaymentStatus(id, status);
+    }
+
+    @DeleteMapping("/{id}")
+    public String deletePayment(@PathVariable Long id) {
+        paymentService.deletePayment(id);
+        return "Payment Deleted Successfully";
+}
 }
