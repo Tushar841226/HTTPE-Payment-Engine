@@ -3,10 +3,10 @@ package com.httpe.auth.service;
 import com.httpe.auth.entity.Payment;
 import com.httpe.auth.repository.PaymentRepository;
 import org.springframework.stereotype.Service;
+import com.httpe.auth.exception.ResourceNotFoundException;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PaymentService {
@@ -27,23 +27,24 @@ public class PaymentService {
         return paymentRepository.findAll();
     }
 
-    public Optional<Payment> getPaymentById(Long id) {
-        return paymentRepository.findById(id);
+    public Payment getPaymentById(Long id) {
+        return paymentRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Payment not found"));
     }
     public Payment updatePaymentStatus(Long id, String status) {
 
     Payment payment = paymentRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Payment not found"));
+            .orElseThrow(() -> new ResourceNotFoundException("Payment not found"));
 
     payment.setStatus(status);
 
     return paymentRepository.save(payment);
-}
+    }
 
-public void deletePayment(Long id) {
+    public void deletePayment(Long id) {
 
     if (!paymentRepository.existsById(id)) {
-        throw new RuntimeException("Payment not found");
+        throw new ResourceNotFoundException("Payment not found");
     }
 
     paymentRepository.deleteById(id);

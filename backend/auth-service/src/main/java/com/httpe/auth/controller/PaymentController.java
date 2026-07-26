@@ -5,7 +5,6 @@ import com.httpe.auth.service.PaymentService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/payments")
@@ -31,10 +30,10 @@ public class PaymentController {
     @GetMapping
     public List<Payment> getAllPayments() {
         return paymentService.getAllPayments();
-}
+    }
 
     @GetMapping("/{id}")
-    public Optional<Payment> getPaymentById(@PathVariable Long id) {
+    public Payment getPaymentById(@PathVariable Long id) {
         return paymentService.getPaymentById(id);
     }
     @PutMapping("/{id}")
@@ -48,5 +47,5 @@ public class PaymentController {
     public String deletePayment(@PathVariable Long id) {
         paymentService.deletePayment(id);
         return "Payment Deleted Successfully";
-}
+    }
 }
