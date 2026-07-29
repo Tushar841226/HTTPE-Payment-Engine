@@ -1,17 +1,10 @@
-package com.httpe.auth.entity;
+package com.httpe.auth.dto;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
-import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "payments")
-public class Payment {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class PaymentRequest {
 
     @NotBlank(message = "Sender name is required")
     private String senderName;
@@ -23,19 +16,7 @@ public class Payment {
     @Positive(message = "Amount must be greater than 0")
     private Double amount;
 
-    private String status;
-
-    private LocalDateTime paymentDate;
-
-    public Payment() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public PaymentRequest() {
     }
 
     public String getSenderName() {
@@ -60,21 +41,5 @@ public class Payment {
 
     public void setAmount(Double amount) {
         this.amount = amount;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public LocalDateTime getPaymentDate() {
-        return paymentDate;
-    }
-
-    public void setPaymentDate(LocalDateTime paymentDate) {
-        this.paymentDate = paymentDate;
     }
 }

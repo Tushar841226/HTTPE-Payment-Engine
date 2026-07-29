@@ -1,8 +1,12 @@
 package com.httpe.auth.controller;
 
+import com.httpe.auth.dto.PaymentRequest;
+import com.httpe.auth.dto.PaymentResponse;
 import com.httpe.auth.entity.Payment;
 import com.httpe.auth.service.PaymentService;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
+
 
 import java.util.List;
 
@@ -19,13 +23,14 @@ public class PaymentController {
     
 
     @PostMapping
-    public Payment createPayment(@RequestBody Payment payment) {
+    public PaymentResponse createPayment(@Valid @RequestBody PaymentRequest request) {
 
     System.out.println("========== PAYMENT API HIT ==========");
-    System.out.println("Sender: " + payment.getSenderName());
-    System.out.println("Receiver: " + payment.getReceiverName());
-    System.out.println("Amount: " + payment.getAmount());
-        return paymentService.createPayment(payment);
+    System.out.println("Sender: " + request.getSenderName());
+    System.out.println("Receiver: " + request.getReceiverName());
+    System.out.println("Amount: " + request.getAmount());
+
+    return paymentService.createPayment(request);
     }
     @GetMapping
     public List<Payment> getAllPayments() {
