@@ -25,7 +25,7 @@ public class PaymentController {
     @PostMapping
     public PaymentResponse createPayment(@Valid @RequestBody PaymentRequest request) {
 
-    System.out.println("========== PAYMENT API HIT ==========");
+    System.out.println("========== PAYMENT API HITs ==========");
     System.out.println("Sender: " + request.getSenderName());
     System.out.println("Receiver: " + request.getReceiverName());
     System.out.println("Amount: " + request.getAmount());
