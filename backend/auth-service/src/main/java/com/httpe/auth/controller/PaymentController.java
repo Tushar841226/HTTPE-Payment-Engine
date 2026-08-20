@@ -51,7 +51,7 @@ public class PaymentController {
     @DeleteMapping("/{id}")
     public String deletePayment(@PathVariable Long id) {
         paymentService.deletePayment(id);
-        return "Payment done ";
+        return "PaymentSSSssss ";
     }
 
     
