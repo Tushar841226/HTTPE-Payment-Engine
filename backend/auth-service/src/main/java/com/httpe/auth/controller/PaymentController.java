@@ -7,7 +7,6 @@ import com.httpe.auth.service.PaymentService;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 
-
 import java.util.List;
 
 @RestController
@@ -20,18 +19,17 @@ public class PaymentController {
         this.paymentService = paymentService;
     }
 
-    
-
     @PostMapping
     public PaymentResponse createPayment(@Valid @RequestBody PaymentRequest request) {
 
-    System.out.println("========== PAYMENT API HITs ==========");
-    System.out.println("Sender: " + request.getSenderName());
-    System.out.println("Receiver: " + request.getReceiverName());
-    System.out.println("Amount: " + request.getAmount());
+        System.out.println("========== PAYMENT API HITs ==========");
+        System.out.println("Sender: " + request.getSenderName());
+        System.out.println("Receiver: " + request.getReceiverName());
+        System.out.println("Amount: " + request.getAmount());
 
-    return paymentService.createPayment(request);
+        return paymentService.createPayment(request);
     }
+
     @GetMapping
     public List<Payment> getAllPayments() {
         return paymentService.getAllPayments();
@@ -41,10 +39,11 @@ public class PaymentController {
     public Payment getPaymentById(@PathVariable Long id) {
         return paymentService.getPaymentById(id);
     }
+
     @PutMapping("/{id}")
     public Payment updatePaymentStatus(
-        @PathVariable Long id,
-        @RequestParam String status) {
+            @PathVariable Long id,
+            @RequestParam String status) {
         return paymentService.updatePaymentStatus(id, status);
     }
 
@@ -54,5 +53,4 @@ public class PaymentController {
         return "PaymentSSSssss ";
     }
 
-    
 }
