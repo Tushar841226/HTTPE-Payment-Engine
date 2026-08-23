@@ -1,19 +1,14 @@
-package com.httpe.auth.dto;
+package com.httpe.notification.dto;
 
-import java.time.LocalDateTime;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-
-public class PaymentResponse {
+public class PaymentNotification {
 
     private Long id;
     private String senderName;
     private String receiverName;
     private Double amount;
     private String status;
-    private LocalDateTime paymentDate;
 
-    public PaymentResponse() {
+    public PaymentNotification() {
     }
 
     public Long getId() {
@@ -56,12 +51,14 @@ public class PaymentResponse {
         this.status = status;
     }
 
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    public LocalDateTime getPaymentDate() {
-        return paymentDate;
-    }
-
-    public void setPaymentDate(LocalDateTime paymentDate) {
-        this.paymentDate = paymentDate;
+    @Override
+    public String toString() {
+        return "PaymentNotification{" +
+                "id=" + id +
+                ", senderName='" + senderName + '\'' +
+                ", receiverName='" + receiverName + '\'' +
+                ", amount=" + amount +
+                ", status='" + status + '\'' +
+                '}';
     }
 }
